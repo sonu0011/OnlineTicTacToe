@@ -25,16 +25,13 @@ fun TicTacToeField(
     onTapInField: (Int, Int) -> Unit
 ) {
 
-    Canvas(
-        modifier = modifier
-            .pointerInput(true) {
-                detectTapGestures {
-                    val x = (3 * it.x.toInt() / size.width)
-                    val y = (3 * it.y.toInt() / size.height)
-                    onTapInField(x, y)
-                }
+    Canvas(modifier = modifier.pointerInput(true) {
+            detectTapGestures {
+                val x = (3 * it.x.toInt() / size.width)
+                val y = (3 * it.y.toInt() / size.height)
+                onTapInField(x, y)
             }
-    ) {
+        }) {
         drawField()
         state.field.forEachIndexed { y, _ ->
             state.field[y].forEachIndexed { x, player ->
@@ -42,15 +39,13 @@ fun TicTacToeField(
                     x = x * size.width * (1 / 3f) + size.width / 6f,
                     y = y * size.height * (1 / 3f) + size.height / 6f
                 )
-                if(player == 'X') {
+                if (player == 'X') {
                     drawX(
-                        color = playerXColor,
-                        center = offset
+                        color = playerXColor, center = offset
                     )
-                } else if(player == 'O') {
+                } else if (player == 'O') {
                     drawO(
-                        color = playerOColor,
-                        center = offset
+                        color = playerOColor, center = offset
                     )
                 }
             }
@@ -61,108 +56,65 @@ fun TicTacToeField(
 private fun DrawScope.drawField() {
     //1st vertical line
     drawLine(
-        color = Color.Black,
-        start = Offset(
-            x = size.width * (1 / 3f),
-            y = 0f
-        ),
-        end = Offset(
-            x = size.width * (1 / 3f),
-            y = size.height
-        ),
-        strokeWidth = 3.dp.toPx(),
-        cap = StrokeCap.Round
+        color = Color.Black, start = Offset(
+            x = size.width * (1 / 3f), y = 0f
+        ), end = Offset(
+            x = size.width * (1 / 3f), y = size.height
+        ), strokeWidth = 3.dp.toPx(), cap = StrokeCap.Round
     )
 
     //2nd vertical line
     drawLine(
-        color = Color.Black,
-        start = Offset(
-            x = size.width * (2 / 3f),
-            y = 0f
-        ),
-        end = Offset(
-            x = size.width * (2 / 3f),
-            y = size.height
-        ),
-        strokeWidth = 3.dp.toPx(),
-        cap = StrokeCap.Round
+        color = Color.Black, start = Offset(
+            x = size.width * (2 / 3f), y = 0f
+        ), end = Offset(
+            x = size.width * (2 / 3f), y = size.height
+        ), strokeWidth = 3.dp.toPx(), cap = StrokeCap.Round
     )
 
     //1st horizontal line
     drawLine(
-        color = Color.Black,
-        start = Offset(
-            x = 0f,
-            y = size.height * (1 / 3f)
-        ),
-        end = Offset(
-            x = size.width,
-            y = size.height * (1 / 3f)
-        ),
-        strokeWidth = 3.dp.toPx(),
-        cap = StrokeCap.Round
+        color = Color.Black, start = Offset(
+            x = 0f, y = size.height * (1 / 3f)
+        ), end = Offset(
+            x = size.width, y = size.height * (1 / 3f)
+        ), strokeWidth = 3.dp.toPx(), cap = StrokeCap.Round
     )
 
     //2nd horizontal line
     drawLine(
-        color = Color.Black,
-        start = Offset(
-            x = 0f,
-            y = size.height * (2 / 3f)
-        ),
-        end = Offset(
-            x = size.width,
-            y = size.height * (2 / 3f)
-        ),
-        strokeWidth = 3.dp.toPx(),
-        cap = StrokeCap.Round
+        color = Color.Black, start = Offset(
+            x = 0f, y = size.height * (2 / 3f)
+        ), end = Offset(
+            x = size.width, y = size.height * (2 / 3f)
+        ), strokeWidth = 3.dp.toPx(), cap = StrokeCap.Round
     )
 }
 
 private fun DrawScope.drawX(
-    color: Color,
-    center: Offset,
-    size: Size = Size(50.dp.toPx(), 50.dp.toPx())
+    color: Color, center: Offset, size: Size = Size(50.dp.toPx(), 50.dp.toPx())
 ) {
     drawLine(
-        color = color,
-        start = Offset(
-            x = center.x - size.width / 2f,
-            y = center.y - size.height / 2f
-        ),
-        end = Offset(
-            x = center.x + size.width / 2f,
-            y = center.y + size.height / 2f
-        ),
-        strokeWidth = 3.dp.toPx(),
-        cap = StrokeCap.Round
+        color = color, start = Offset(
+            x = center.x - size.width / 2f, y = center.y - size.height / 2f
+        ), end = Offset(
+            x = center.x + size.width / 2f, y = center.y + size.height / 2f
+        ), strokeWidth = 3.dp.toPx(), cap = StrokeCap.Round
     )
     drawLine(
-        color = color,
-        start = Offset(
-            x = center.x - size.width / 2f,
-            y = center.y + size.height / 2f
-        ),
-        end = Offset(
-            x = center.x + size.width / 2f,
-            y = center.y - size.height / 2f
-        ),
-        strokeWidth = 3.dp.toPx(),
-        cap = StrokeCap.Round
+        color = color, start = Offset(
+            x = center.x - size.width / 2f, y = center.y + size.height / 2f
+        ), end = Offset(
+            x = center.x + size.width / 2f, y = center.y - size.height / 2f
+        ), strokeWidth = 3.dp.toPx(), cap = StrokeCap.Round
     )
 }
 
 private fun DrawScope.drawO(
-    color: Color,
-    center: Offset,
-    size: Size = Size(50.dp.toPx(), 50.dp.toPx())
+    color: Color, center: Offset, size: Size = Size(50.dp.toPx(), 50.dp.toPx())
 ) {
     drawCircle(
-        color = color,
-        center = center,
-        radius = size.width / 2f,
-        style = Stroke(
+        color = color, center = center, radius = size.width / 2f, style = Stroke(
             width = 3.dp.toPx()
         )
     )
@@ -178,8 +130,6 @@ fun TicTacToeFieldPreview() {
                 arrayOf(null, 'O', 'O'),
                 arrayOf(null, 'X', null),
             ),
-        ),
-        onTapInField = { _, _ -> },
-        modifier = Modifier.size(300.dp)
+        ), onTapInField = { _, _ -> }, modifier = Modifier.size(300.dp)
     )
 }

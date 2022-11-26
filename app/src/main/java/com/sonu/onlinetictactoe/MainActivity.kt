@@ -32,11 +32,9 @@ class MainActivity : ComponentActivity() {
                 val state by viewModel.state.collectAsState()
                 val isConnecting by viewModel.isConnecting.collectAsState()
                 val showConnectionError by viewModel.showConnectionError.collectAsState()
-                Log.e("TAG==>", "onCreate: $state")
                 if (showConnectionError) {
                     Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
+                        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = "Couldn't connect to the server",
@@ -46,8 +44,7 @@ class MainActivity : ComponentActivity() {
                     return@OnlineTicTacToeTheme
                 }
                 Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
+                    modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                 ) {
                     Column(
                         modifier = Modifier
@@ -56,27 +53,21 @@ class MainActivity : ComponentActivity() {
                     ) {
                         if (!state.connectedPlayers.contains('X')) {
                             Text(
-                                text = "Waiting for player X",
-                                fontSize = 32.sp
+                                text = "Waiting for player X", fontSize = 32.sp
                             )
                         } else if (!state.connectedPlayers.contains('O')) {
                             Text(
-                                text = "Waiting for player O",
-                                fontSize = 32.sp
+                                text = "Waiting for player O", fontSize = 32.sp
                             )
                         }
                     }
-                    if (
-                        state.connectedPlayers.size == 2 && state.winningPlayer == null &&
-                        !state.isBoardFull
-                    ) {
+                    if (state.connectedPlayers.size == 2 && state.winningPlayer == null && !state.isBoardFull) {
                         Text(
                             text = if (state.playerAtTurn == 'X') {
                                 "X is next"
                             } else "O is next",
                             fontSize = 32.sp,
-                            modifier = Modifier
-                                .align(Alignment.TopCenter)
+                            modifier = Modifier.align(Alignment.TopCenter)
                         )
                     }
                     TicTacToeField(
